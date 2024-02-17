@@ -1,0 +1,24 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:WindowTemplateWithPopup.Strings">
+
+    <!--Title window-->
+    <system:String x:Key="window_title">Шаблон окна с "Всплывающим окном"</system:String>
+
+    <!--Popup button-->
+    <system:String x:Key="btn_open_popup">Открыть "Всплывающее окно"</system:String>
+
+    
+    <!--Greeteng string-->
+    <system:String x:Key="greeteng">Привет, это страница Главного окна</system:String>
+
+    <!--Greeteng popup string-->
+    <system:String x:Key="popup_greeteng">Это всплывающее окно</system:String>
+
+    <!--Window menu "new file" string-->
+    <system:String x:Key="window_menu_new">Создать</system:String>
+
+    <!--Window menu "Open file..." string-->
+    <system:String x:Key="window_menu_open">Открыть...</system:String>
+</ResourceDictionary>
