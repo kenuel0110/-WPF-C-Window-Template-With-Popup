@@ -17,6 +17,8 @@
             <Color x:Key="Background_Button_TitleBar">#3f3f41</Color>
             <Color x:Key="Background_Button_Hover_TitleBar">#3f3f41</Color>
             <Color x:Key="Background_Button_Close">#6a000d</Color>
+            <Color x:Key="Background_Button_Main">#1d495d</Color>
+            <Color x:Key="Background_Button_Hover_Main">#0E252F</Color>
             <Color x:Key="Background_Context_menu">#FF222222</Color>
             <Color x:Key="Foreground_Header">#f1f1f1</Color>
             <Color x:Key="Foreground_Text">#bebebe</Color>
@@ -27,7 +29,9 @@
             <SolidColorBrush x:Key="foreground_header" Color="{StaticResource Foreground_Header}"/>
             <SolidColorBrush x:Key="foreground_text" Color="{StaticResource Foreground_Text}"/>
             <SolidColorBrush x:Key="button_titlebar_hover_background" Opacity="0.5" Color="{StaticResource Background_Button_Hover_TitleBar}"/>
+            <SolidColorBrush x:Key="button_hover_main_background" Opacity="0.5" Color="{StaticResource Background_Button_Hover_Main}"/>
             <SolidColorBrush x:Key="button_close_hover_background" Opacity="0.5" Color="{StaticResource Background_Button_Close}"/>
+            <SolidColorBrush x:Key="button_main_background" Color="{StaticResource Background_Button_Main}"/>
             <SolidColorBrush x:Key="context_menu_background" Color="{StaticResource Background_Context_menu}"/>
             <SolidColorBrush x:Key="context_menu_hover_background" Color="{StaticResource Background_Context_menu}"/>
             <!--======-->
@@ -45,7 +49,8 @@
             <!--=====-->
 
             <!--Sizes-->
-            <sys:Double x:Key="size_CornerRadiusValue">25</sys:Double>
+            <CornerRadius x:Key="size_CornerRadiusValue">25</CornerRadius>
+            <CornerRadius x:Key="size_CornerRadiusSlidedownPopup">8</CornerRadius>
             <CornerRadius x:Key="size_CornerRadiusButton">5</CornerRadius>
             <sys:Double x:Key="size_textblock_header">18</sys:Double>
             <sys:Double x:Key="size_textblock_text">14</sys:Double>
@@ -53,7 +58,15 @@
             <sys:Double x:Key="size_button_text">13</sys:Double>
             <sys:Double x:Key="size_control_button_height">34</sys:Double>
             <sys:Double x:Key="size_control_button_width">34</sys:Double>
+            <sys:Double x:Key="size_control_popup_button_height">24</sys:Double>
+            <sys:Double x:Key="size_control_popup_button_width">24</sys:Double>
             <Thickness x:Key="size_control_image_margin">6</Thickness>
+            <sys:Double x:Key="size_shadow_button">6</sys:Double>
+            <sys:Double x:Key="size_shadow_depth_button">3</sys:Double>
+            <sys:Double x:Key="size_shadow_opacity_button">0.2</sys:Double>
+            <Thickness x:Key="size_small_padding">5</Thickness>
+            <sys:Double x:Key="size_minheight">64</sys:Double>
+            <Thickness x:Key="size_small_margin">5</Thickness>
             <!--=====-->
 
             <!--Styles-->
@@ -62,7 +75,36 @@
                     <Setter Property="Background" Value="{StaticResource Background_Popup}"/>
                 <Setter Property="CornerRadius" Value="{StaticResource size_CornerRadiusValue}"/>
                 </Style>
-                <!--=====-->
+
+                <Style x:Key="popup_slidedown_border" TargetType="Border" BasedOn="{StaticResource MaterialDesignToolBarMainPanelBorderStyle}">
+                <Setter Property="Background" Value="{StaticResource popup_background}"/>
+                <Setter Property="CornerRadius" Value="{StaticResource size_CornerRadiusSlidedownPopup}"/>
+                <Setter Property="VerticalAlignment" Value="Top"/>
+                <Setter Property="Margin" Value="{StaticResource size_small_margin}"/>
+                <Setter Property="MinHeight" Value="{StaticResource size_minheight}"/>
+                <Setter Property="Padding" Value="{StaticResource size_small_padding}"/>
+                <Style.Triggers>
+                    <Trigger Property="Visibility" Value="Visible">
+                        <Trigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation From="0" To="1" Duration="0:0:0.5" Storyboard.TargetProperty="Opacity"/>
+                                    <DoubleAnimation From="-50" To="0" Duration="0:0:0.5" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.EnterActions>
+                        <Trigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation From="1" To="0" Duration="0:0:0.5" Storyboard.TargetProperty="Opacity"/>
+                                    <DoubleAnimation From="0" To="-50" Duration="0:0:0.5" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.ExitActions>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <!--=====-->
 
             <!--Context menu-->
             <Style x:Key="button_menu_context_menu" TargetType="ContextMenu" BasedOn="{StaticResource MaterialDesignContextMenu}">
@@ -79,7 +121,7 @@
             </Style>
 
             <!--TextBlock-->
-                <Style x:Key="textblock_title" TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignHeadline1TextBlock}">
+                <Style x:Key="textblock_header" TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignHeadline1TextBlock}">
                     <Setter Property="Foreground" Value="{StaticResource foreground_header}"/>
                     <Setter Property="FontFamily" Value="{StaticResource LackRegular}"/>
                     <Setter Property="FontWeight" Value="SemiBold"/>
@@ -92,10 +134,22 @@
                     <Setter Property="FontWeight" Value="SemiBold"/>
                     <Setter Property="FontSize" Value="{StaticResource size_textblock_title_window}"/>
                 </Style>
+
+                <Style x:Key="textblock_popup_text" TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignHeadline1TextBlock}">
+                    <Setter Property="Foreground" Value="{StaticResource foreground_text}"/>
+                    <Setter Property="FontFamily" Value="{StaticResource LackRegular}"/>
+                    <Setter Property="FontWeight" Value="Regular"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Setter Property="VerticalAlignment" Value="Top"/>
+                    <Setter Property="Margin" Value="5 -8 5 5"/>
+                    <Setter Property="TextWrapping" Value="Wrap"/>
+                    <Setter Property="FontSize" Value="{StaticResource size_textblock_title_window}"/>
+                </Style>
             <!--=========-->
 
                 <!--Button-->
-            <Style x:Key="button_menu" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                <Style x:Key="button_menu" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
                 <Setter Property="Foreground" Value="{StaticResource foreground_text}"/>
                 <Setter Property="FontFamily" Value="{StaticResource LackRegular}"/>
                 <Setter Property="FontWeight" Value="Regular"/>
@@ -202,7 +256,82 @@
                         </Trigger>
                     </Style.Triggers>
                 </Style>
-                <!--=========-->
+
+                <Style x:Key="button_main" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                    <Setter Property="Foreground" Value="{StaticResource foreground_header}"/>
+                    <Setter Property="FontFamily" Value="{StaticResource LackRegular}"/>
+                    <Setter Property="FontWeight" Value="Regular"/>
+                    <Setter Property="Background" Value="{StaticResource button_main_background}"/>
+                    <Setter Property="FontSize" Value="{StaticResource size_button_text}"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="border" Background="{StaticResource button_main_background}" BorderBrush="Transparent" CornerRadius="{StaticResource size_CornerRadiusButton}" BorderThickness="0" Padding="10 5">
+                                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                    <Border.BitmapEffect>
+                                        <DropShadowBitmapEffect Color="Black" Softness="{StaticResource size_shadow_button}" Opacity="{StaticResource size_shadow_opacity_button}" ShadowDepth="{StaticResource size_shadow_depth_button}"/>
+                                    </Border.BitmapEffect>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="{StaticResource button_hover_main_background}" />
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="False">
+                                    <Setter TargetName="border" Property="Background" Value="{StaticResource button_main_background}" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="{StaticResource button_hover_main_background}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+
+            <Style x:Key="button_control_popup" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                <Setter Property="Foreground" Value="{StaticResource foreground_text}"/>
+                <Setter Property="FontFamily" Value="{StaticResource LackRegular}"/>
+                <Setter Property="FontWeight" Value="Regular"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Height" Value="{StaticResource size_control_popup_button_height}"/>
+                <Setter Property="Width" Value="{StaticResource size_control_popup_button_width}"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="FontSize" Value="{StaticResource size_button_text}"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Padding="0">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="{StaticResource button_titlebar_hover_background}" />
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="False">
+                                    <Setter TargetName="border" Property="Background" Value="Transparent" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="{StaticResource button_titlebar_hover_background}" />
+                    </Trigger>
+                    <Trigger Property="IsMouseOver" Value="False">
+                        <Setter Property="Background" Value="Transparent"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <!--=========-->
             
                 <!--Image-->
                 <Style x:Key="image_control_window" TargetType="Image">
@@ -218,7 +347,7 @@
             <ResourceDictionary.MergedDictionaries>
 
                 <!--Language-->
-                <ResourceDictionary Source="/Strings/Strings.xaml"/>
+                <ResourceDictionary Source="/Strings/Strings.en_EN.xaml"/>
                 <ResourceDictionary Source="/Strings/Strings.ru-RU.xaml"/>
                 <!--========-->
 

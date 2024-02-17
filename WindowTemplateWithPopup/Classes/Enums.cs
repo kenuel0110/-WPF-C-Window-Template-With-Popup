@@ -14,5 +14,12 @@ namespace WindowTemplateWithPopup.Classes
             Maximilize = 1,
             None = 2
         }
+
+        public enum Popups
+        {
+            None = 0,
+            SlideDown = 1,
+            Popup = 2
+        }
     }
 }

@@ -8,6 +8,7 @@
         AllowsTransparency="True"
         WindowStyle="None"
         mc:Ignorable="d"
+        ResizeMode="CanResizeWithGrip"
         Icon="{StaticResource ic_logo}"
         Title="MainWindow" MinHeight="450" MinWidth="800"
         SizeChanged="Window_SizeChanged"
@@ -63,9 +64,9 @@
         <!--Frame for popups-->
         <Frame Name="popup_frame" Panel.ZIndex="3" Grid.Row="1" Visibility="Hidden" NavigationUIVisibility="Hidden"/>
         <!--Border for to dim main_frame-->
-        <Border x:Name="border_shadow" Grid.Row="2" Panel.ZIndex="1" Visibility="Hidden" Opacity="0" Margin="-5" Background="Black"/>
+        <Border x:Name="border_shadow" Grid.Row="1" Panel.ZIndex="1" Visibility="Hidden" Opacity="0" Margin="-5" Background="Black"/>
         <!--Frame for a small pop-up that comes out of the top of the window-->
-        <Frame Name="popup_slide_frame" Panel.ZIndex="1" Visibility="Hidden" NavigationUIVisibility="Hidden"/>
+        <Frame Grid.Row="1" Name="popup_slide_frame" Panel.ZIndex="1" Visibility="Visible" NavigationUIVisibility="Hidden"/>
         <!--Main frame for main content-->
         <Frame Grid.Row="1" Panel.ZIndex="0" Name="main_frame" NavigationUIVisibility="Hidden"/>
     </Grid>

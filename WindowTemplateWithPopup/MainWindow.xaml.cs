@@ -24,8 +24,7 @@ namespace WindowTemplateWithPopup
     {
         #region global_values
         //Language strings
-        public string osLanguage;
-
+        public string systemLanguage;
         #endregion
 
         #region local_values
@@ -51,7 +50,8 @@ namespace WindowTemplateWithPopup
         private void init()
         {
             //get language
-            osLanguage = System.Globalization.CultureInfo.InstalledUICulture.Name;
+            systemLanguage = System.Globalization.CultureInfo.CurrentCulture.Name;
+            App.SelectCulture(systemLanguage);
 
             mainwindow_funcs.chkFirstStart("settings", "settings.json");
             mainwindow_funcs.create_json("temp.json");
@@ -70,7 +70,7 @@ namespace WindowTemplateWithPopup
             newWindowPosX = setting.position_window[0];
             newWindowPosY = setting.position_window[1];
 
-            //main_frame.NavigationService.Navigate(new Pages.Page_start());
+            main_frame.NavigationService.Navigate(new Pages.Page_main());
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)

@@ -13,6 +13,22 @@ namespace WindowTemplateWithPopup.Funcs
     {
         public MainWindow mainWindow = App.Current.MainWindow as MainWindow;
 
+        public void showslidedownpopup(Classes.Enums.Popups popup = Classes.Enums.Popups.None, string info = "") 
+        {
+            switch (popup) 
+            {
+                case Classes.Enums.Popups.SlideDown:
+                    mainWindow.popup_slide_frame.Visibility = Visibility.Visible;
+                    mainWindow.popup_slide_frame.NavigationService.Navigate(new Popups.Popup_slidedown_info(info));
+                    break;
+            }
+        }
+
+        public void hidelidedownpopup()
+        {
+            mainWindow.popup_slide_frame.Visibility = Visibility.Hidden;
+        }
+
         //blur main frame content
         public void blurBackground()
         {
