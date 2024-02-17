@@ -114,22 +114,29 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Popups\Popup_question.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Popups\Popup_slidedown_info.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Strings\Strings.ru-RU.xaml">
+    <Resource Include="Strings\Strings.ru-RU.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Strings\Strings.en-EN.xaml">
+    </Resource>
+    <Resource Include="Strings\Strings.en-EN.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Pages\Page_main.xaml.cs">
       <DependentUpon>Page_main.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Popups\Popup_question.xaml.cs">
+      <DependentUpon>Popup_question.xaml</DependentUpon>
     </Compile>
     <Compile Include="Popups\Popup_slidedown_info.xaml.cs">
       <DependentUpon>Popup_slidedown_info.xaml</DependentUpon>

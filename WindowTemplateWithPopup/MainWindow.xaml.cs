@@ -51,12 +51,14 @@ namespace WindowTemplateWithPopup
         {
             //get language
             systemLanguage = System.Globalization.CultureInfo.CurrentCulture.Name;
-            App.SelectCulture(systemLanguage);
 
             mainwindow_funcs.chkFirstStart("settings", "settings.json");
             mainwindow_funcs.create_json("temp.json");
 
             Classes.Data_Classes.Class_JSON_Setting setting = mainwindow_funcs.openJSONSetting();
+
+            App.SelectCulture(setting.window_language);
+
             WindowSizeState(setting.maximilize_window);
             System.Windows.Application.Current.MainWindow.Height = setting.size_window[0];
             System.Windows.Application.Current.MainWindow.Width = setting.size_window[1];

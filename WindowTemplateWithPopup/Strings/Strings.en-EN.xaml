@@ -29,4 +29,10 @@
 
     <!--Window menu "Open file..." string-->
     <system:String x:Key="window_menu_open">Open...</system:String>
+    <!--Window change language-->
+    <system:String x:Key="window_change_language">Restart app to set changes</system:String>
+    <!--Popup button accept-->
+    <system:String x:Key="popup_accept">Yes</system:String>
+    <!--Popup button cancel-->
+    <system:String x:Key="popup_cancel">No</system:String>
 </ResourceDictionary>

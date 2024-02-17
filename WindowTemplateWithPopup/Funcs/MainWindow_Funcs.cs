@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Markup;
+using System.Windows.Media;
 
 namespace WindowTemplateWithPopup.Funcs
 {

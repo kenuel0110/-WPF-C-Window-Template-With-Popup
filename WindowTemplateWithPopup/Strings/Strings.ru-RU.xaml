@@ -29,4 +29,11 @@
 
     <!--Window menu "Open file..." string-->
     <system:String x:Key="window_menu_open">Открыть...</system:String>
+
+    <!--Window change language-->
+    <system:String x:Key="window_change_language">Перезагрузите приложение, чтобы изменения применились</system:String>
+    <!--Popup button accept-->
+    <system:String x:Key="popup_accept">Да</system:String>
+    <!--Popup button cancel-->
+    <system:String x:Key="popup_cancel">Нет</system:String>
 </ResourceDictionary>

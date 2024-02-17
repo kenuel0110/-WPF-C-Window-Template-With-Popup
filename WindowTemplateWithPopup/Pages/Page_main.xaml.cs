@@ -25,6 +25,7 @@ namespace WindowTemplateWithPopup.Pages
 
         #region local_value
         private Funcs.Popups_Funcs popups_funcs = new Funcs.Popups_Funcs();
+        private Funcs.MainWindow_Funcs window_funcs = new Funcs.MainWindow_Funcs();
         private MainWindow mainWindow = App.Current.MainWindow as MainWindow;
         private string language_state;
         #endregion
@@ -37,7 +38,7 @@ namespace WindowTemplateWithPopup.Pages
 
         private void btn_change_language_Click(object sender, RoutedEventArgs e)
         {
-            if (language_state == "en-EN") 
+            if (language_state == "en-EN")
             {
                 App.SelectCulture("ru-RU");
                 language_state = "ru-RU";
@@ -47,6 +48,8 @@ namespace WindowTemplateWithPopup.Pages
                 App.SelectCulture("en-EN");
                 language_state = "en-EN";
             }
+
+            popups_funcs.showslidedownpopup(Classes.Enums.Popups.SlideDown, FindResource("window_change_language").ToString());
         }
 
         private void btn_open_popup_Click(object sender, RoutedEventArgs e)
@@ -58,5 +61,6 @@ namespace WindowTemplateWithPopup.Pages
         {
             popups_funcs.showslidedownpopup(Classes.Enums.Popups.SlideDown, FindResource("popup_greeteng").ToString());
         }
+
     }
 }
