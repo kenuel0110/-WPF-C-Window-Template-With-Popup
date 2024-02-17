@@ -15,7 +15,7 @@
             <Color x:Key="Background_Dark">#0e101f</Color>
             <Color x:Key="Background_Popup">#333333</Color>
             <Color x:Key="Background_Button_TitleBar">#3f3f41</Color>
-            <Color x:Key="Background_Button_Hover_TitleBar">#282828</Color>
+            <Color x:Key="Background_Button_Hover_TitleBar">#3f3f41</Color>
             <Color x:Key="Background_Button_Close">#6a000d</Color>
             <Color x:Key="Background_Context_menu">#FF222222</Color>
             <Color x:Key="Foreground_Header">#f1f1f1</Color>
@@ -26,7 +26,8 @@
             <SolidColorBrush x:Key="popup_background" Color="{StaticResource Background_Popup}"/>
             <SolidColorBrush x:Key="foreground_header" Color="{StaticResource Foreground_Header}"/>
             <SolidColorBrush x:Key="foreground_text" Color="{StaticResource Foreground_Text}"/>
-            <SolidColorBrush x:Key="button_click_background" Opacity="0.1" Color="{StaticResource Background_Button_Hover_TitleBar}"/>
+            <SolidColorBrush x:Key="button_titlebar_hover_background" Opacity="0.5" Color="{StaticResource Background_Button_Hover_TitleBar}"/>
+            <SolidColorBrush x:Key="button_close_hover_background" Opacity="0.5" Color="{StaticResource Background_Button_Close}"/>
             <SolidColorBrush x:Key="context_menu_background" Color="{StaticResource Background_Context_menu}"/>
             <SolidColorBrush x:Key="context_menu_hover_background" Color="{StaticResource Background_Context_menu}"/>
             <!--======-->
@@ -45,6 +46,7 @@
 
             <!--Sizes-->
             <sys:Double x:Key="size_CornerRadiusValue">25</sys:Double>
+            <CornerRadius x:Key="size_CornerRadiusButton">5</CornerRadius>
             <sys:Double x:Key="size_textblock_header">18</sys:Double>
             <sys:Double x:Key="size_textblock_text">14</sys:Double>
             <sys:Double x:Key="size_textblock_title_window">12</sys:Double>
@@ -93,42 +95,41 @@
             <!--=========-->
 
                 <!--Button-->
-            <Style x:Key="button_menu" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatDarkBgButton}">
+            <Style x:Key="button_menu" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
                 <Setter Property="Foreground" Value="{StaticResource foreground_text}"/>
                 <Setter Property="FontFamily" Value="{StaticResource LackRegular}"/>
                 <Setter Property="FontWeight" Value="Regular"/>
                 <Setter Property="Background" Value="Transparent"/>
                 <Setter Property="FontSize" Value="{StaticResource size_button_text}"/>
                 <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border" Background="Transparent" BorderBrush="Transparent" CornerRadius="{StaticResource size_CornerRadiusButton}" BorderThickness="0" Padding="10 5">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="{StaticResource button_titlebar_hover_background}" />
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="False">
+                                    <Setter TargetName="border" Property="Background" Value="Transparent" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="BorderBrush" Value="Transparent"/>
-                        <Setter Property="Background" Value="{StaticResource button_click_background}"/>
+                        <Setter Property="Background" Value="{StaticResource button_titlebar_hover_background}" />
                     </Trigger>
-                    <Trigger Property="IsPressed" Value="True">
-                        <Setter Property="BorderBrush" Value="Transparent"/>
-                        <Setter Property="Background" Value="{StaticResource button_click_background}"/>
-                    </Trigger>
-                    <Trigger Property="IsFocused" Value="False">
-                        <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Trigger Property="IsMouseOver" Value="False">
                         <Setter Property="Background" Value="Transparent"/>
                     </Trigger>
-                    <Trigger Property="IsFocused" Value="True">
-                        <Setter Property="BorderBrush" Value="Transparent"/>
-                        <Setter Property="Background" Value="{StaticResource button_click_background}"/>
-                    </Trigger>
-                    <EventTrigger RoutedEvent="Click">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <ColorAnimation To="Transparent" Duration="0:0:0.1" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" />
-                                <ColorAnimation To="{StaticResource Background_Button_TitleBar}" Duration="0:0:0.1" BeginTime="0:0:0.1" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
                 </Style.Triggers>
-                </Style>
+            </Style>
 
-            <Style x:Key="button_control_window" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatDarkBgButton}">
+            <Style x:Key="button_control_window" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
                     <Setter Property="Foreground" Value="{StaticResource foreground_text}"/>
                     <Setter Property="FontFamily" Value="{StaticResource LackRegular}"/>
                     <Setter Property="FontWeight" Value="Regular"/>
@@ -138,51 +139,34 @@
                     <Setter Property="Padding" Value="0"/>
                     <Setter Property="FontSize" Value="{StaticResource size_button_text}"/>
                     <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="border" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Padding="0">
+                                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="{StaticResource button_titlebar_hover_background}" />
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="False">
+                                        <Setter TargetName="border" Property="Background" Value="Transparent" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
                     <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="BorderBrush" Value="Transparent"/>
-                            <Setter Property="Background" Value="{StaticResource button_click_background}"/>
-                        </Trigger>
-                        <Trigger Property="IsFocused" Value="True">
-                            <Setter Property="BorderBrush" Value="Transparent"/>
-                            <Setter Property="Background" Value="{StaticResource button_click_background}"/>
-                        </Trigger>
-                        <Trigger Property="IsFocused" Value="False">
-                            <Setter Property="BorderBrush" Value="Transparent"/>
-                            <Setter Property="Background" Value="Transparent"/>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource button_titlebar_hover_background}" />
                             </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="BorderBrush" Value="Transparent"/>
-                                <Setter Property="Background" Value="{StaticResource button_click_background}"/>
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Setter Property="Background" Value="Transparent"/>
                             </Trigger>
-                            <EventTrigger RoutedEvent="MouseEnter">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                    <ColorAnimation To="Transparent" Duration="0:0:0.2" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" />
-                                        <ColorAnimation To="{StaticResource Background_Button_Hover_TitleBar}" Duration="0:0:0.2" BeginTime="0:0:0.1" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                            <EventTrigger RoutedEvent="MouseLeave">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                    <ColorAnimation To="{StaticResource Background_Button_Hover_TitleBar}" Duration="0:0:0.2" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" />
-                                        <ColorAnimation To="Transparent" Duration="0:0:0.2" BeginTime="0:0:0.2" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        <EventTrigger RoutedEvent="Click">
-                            <BeginStoryboard>
-                            <Storyboard>
-                                <ColorAnimation To="Transparent" Duration="0:0:0.1" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" />
-                                <ColorAnimation To="Transparent" Duration="0:0:0.1" BeginTime="0:0:0.1" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                        </EventTrigger>
-                </Style.Triggers>
+                        </Style.Triggers>
                 </Style>
 
-                <Style x:Key="button_control_close_window" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatDarkBgButton}">
+            <Style x:Key="button_control_close_window" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
                     <Setter Property="Foreground" Value="{StaticResource foreground_text}"/>
                     <Setter Property="FontFamily" Value="{StaticResource LackRegular}"/>
                     <Setter Property="FontWeight" Value="Regular"/>
@@ -192,42 +176,33 @@
                     <Setter Property="Padding" Value="0"/>
                     <Setter Property="FontSize" Value="{StaticResource size_button_text}"/>
                     <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="border" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Padding="0">
+                                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="border" Property="Background" Value="{StaticResource button_close_hover_background}" />
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="False">
+                                        <Setter TargetName="border" Property="Background" Value="Transparent" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="BorderBrush" Value="Transparent"/>
-                            <Setter Property="Background" Value="{StaticResource button_click_background}"/>
+                            <Setter Property="Background" Value="{StaticResource button_close_hover_background}" />
                         </Trigger>
-                        <Trigger Property="IsFocused" Value="True">
-                            <Setter Property="BorderBrush" Value="Transparent"/>
-                            <Setter Property="Background" Value="{StaticResource button_click_background}"/>
-                        </Trigger>
-                        <Trigger Property="IsFocused" Value="False">
-                            <Setter Property="BorderBrush" Value="Transparent"/>
+                        <Trigger Property="IsMouseOver" Value="False">
                             <Setter Property="Background" Value="Transparent"/>
                         </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="BorderBrush" Value="Transparent"/>
-                            <Setter Property="Background" Value="{StaticResource button_click_background}"/>
-                        </Trigger>
-                    <EventTrigger RoutedEvent="MouseEnter">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <ColorAnimation To="Transparent" Duration="0:0:0.2" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" />
-                                <ColorAnimation To="{StaticResource Background_Button_Close}" Duration="0:0:0.2" BeginTime="0:0:0.2" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                    <EventTrigger RoutedEvent="MouseLeave">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <ColorAnimation To="{StaticResource Background_Button_Close}" Duration="0:0:0.1" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" />
-                                <ColorAnimation To="Transparent" Duration="0:0:0.1" BeginTime="0:0:0.1" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </Style.Triggers>
+                    </Style.Triggers>
                 </Style>
-            <!--=========-->
+                <!--=========-->
             
                 <!--Image-->
                 <Style x:Key="image_control_window" TargetType="Image">
