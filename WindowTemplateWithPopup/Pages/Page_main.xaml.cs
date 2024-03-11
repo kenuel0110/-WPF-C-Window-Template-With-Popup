@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -38,18 +39,23 @@ namespace WindowTemplateWithPopup.Pages
 
         private void btn_change_language_Click(object sender, RoutedEventArgs e)
         {
-            if (language_state == "en-EN")
+            switch (language_state) 
             {
-                App.SelectCulture("ru-RU");
-                language_state = "ru-RU";
-            }
-            else if (language_state == "ru-RU")
-            {
-                App.SelectCulture("en-EN");
-                language_state = "en-EN";
+                case "en-EN":
+                    language_state = "ru-RU";
+                    App.SelectCulture(language_state);
+                    break;
+                case "ru-RU":
+
+                    language_state = "en-EN";
+                    App.SelectCulture(language_state);
+                    break;
             }
 
-            popups_funcs.showslidedownpopup(Classes.Enums.Popups.SlideDown, FindResource("window_change_language").ToString());
+            //reastart app
+            System.Windows.Application.Current.Shutdown();
+            Thread.Sleep(100);
+            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
         }
 
         private void btn_open_popup_Click(object sender, RoutedEventArgs e)

@@ -59,7 +59,6 @@ namespace WindowTemplateWithPopup
 
             MainWindow mainWindow = App.Current.MainWindow as MainWindow;
             mainWindow.systemLanguage = culture;
-            mainWindow.UpdateLayout();
         }
 
     }

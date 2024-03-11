@@ -110,6 +110,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\Page_empty.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Page_main.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -132,6 +136,9 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pages\Page_empty.xaml.cs">
+      <DependentUpon>Page_empty.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Page_main.xaml.cs">
       <DependentUpon>Page_main.xaml</DependentUpon>
     </Compile>
