@@ -11,11 +11,22 @@
     <Grid>
         <StackPanel Margin="25" Orientation="Vertical">
             <TextBlock Style="{StaticResource textblock_header}" Text="{StaticResource greeteng}"/>
-            <StackPanel Margin="0 15" Orientation="Horizontal">
-                <ComboBox Style="{StaticResource combobox_accent}" x:Name="cb_change_language"  UseLayoutRounding="True" Margin="5" SelectedIndex="0" SelectionChanged="cb_change_language_SelectionChanged" ItemsSource="{Binding availableCultures}"/>
-                <Button x:Name="btn_open_popup" Click="btn_open_popup_Click"  Content="{StaticResource btn_open_popup}" Style="{StaticResource button_main}" Margin="5"/>
-                <Button x:Name="btn_open_small_popup" Click="btn_open_small_popup_Click" Content="{StaticResource btn_open_small_popup}" Style="{StaticResource button_main}" Margin="5"/>
-            </StackPanel>
+            <Grid Margin="0 15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <ComboBox Grid.Column="0" Style="{StaticResource combobox_accent}" x:Name="cb_change_language"  UseLayoutRounding="True" Margin="5" SelectedIndex="0" SelectionChanged="cb_change_language_SelectionChanged" ItemsSource="{Binding availableCultures}"/>
+                <Button Grid.Column="1" x:Name="btn_open_popup" Click="btn_open_popup_Click"  Content="{StaticResource btn_open_popup}" Style="{StaticResource button_main}" Margin="5"/>
+                <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource textblock_window}" HorizontalAlignment="Center" Text="Ctrl + S"/>
+                <Button Grid.Column="2" x:Name="btn_open_small_popup" Click="btn_open_small_popup_Click" Content="{StaticResource btn_open_small_popup}" Style="{StaticResource button_main}" Margin="5"/>
+            </Grid>
         </StackPanel>
     </Grid>
 </Page>

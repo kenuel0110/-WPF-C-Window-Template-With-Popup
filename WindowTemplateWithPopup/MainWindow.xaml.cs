@@ -27,6 +27,9 @@ namespace WindowTemplateWithPopup
         //Language strings
         public string systemLanguage;
         public List<string> availableCultures;
+
+        //hot keys
+        public static RoutedCommand MyCommand = new RoutedCommand();
         #endregion
 
         #region local_values
@@ -39,6 +42,8 @@ namespace WindowTemplateWithPopup
         private double newWindowPosY;
 
         private Classes.Enums.WindowState window_state;
+
+        
 
         //local keys for popup
         bool setdialogResult_popup;
@@ -85,7 +90,24 @@ namespace WindowTemplateWithPopup
             newWindowPosX = setting.position_window[0];
             newWindowPosY = setting.position_window[1];
 
+            //hot key
+            MyCommand.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Control));
+
             main_frame.NavigationService.Navigate(new Pages.Page_main());
+        }
+
+        //hot key funcs
+        private async void MyCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            bool result = await open_popup();
+            if (result == true)
+            {
+                MessageBox.Show(FindResource("popup_accept").ToString());
+            }
+            else
+            {
+                MessageBox.Show(FindResource("popup_cancel").ToString());
+            }
         }
 
         //open Popup func
@@ -102,6 +124,7 @@ namespace WindowTemplateWithPopup
             return result;
         }
 
+        //set popup result
         internal void SetDialogResult_popup(bool result)
         {
             setdialogResult_popup = result;
@@ -112,6 +135,7 @@ namespace WindowTemplateWithPopup
             tcs.TrySetCanceled();
         }
 
+        //blur background
         public void blurBackground()
         {
             border_shadow.Visibility = Visibility.Visible;
@@ -144,6 +168,7 @@ namespace WindowTemplateWithPopup
             border_shadow.Visibility = Visibility.Visible;
         }
 
+        //deblur background
         public void deblurBackground()
         {
             BlurEffect blurEffect = new BlurEffect();
@@ -175,6 +200,7 @@ namespace WindowTemplateWithPopup
             border_shadow.Visibility = Visibility.Hidden;
         }
 
+        //event closing window
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             mainwindow_funcs.removeTemp();
@@ -187,7 +213,7 @@ namespace WindowTemplateWithPopup
                 });
         }
 
-        //Изменение состояния окна
+        //Change state window
         private void WindowSizeState(Classes.Enums.WindowState key = Classes.Enums.WindowState.None)
         {
             if (this.WindowState == WindowState.Maximized || key == Classes.Enums.WindowState.Normal)
@@ -207,7 +233,7 @@ namespace WindowTemplateWithPopup
             }
         }
 
-        //Перетаскивание окна
+        //Move window
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
@@ -221,7 +247,7 @@ namespace WindowTemplateWithPopup
                 }
         }
 
-        //Главные кнопки окна
+        //Main buttons of the window like close / hide and maximizate
         private void btn_close_Click(object sender, RoutedEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
@@ -238,7 +264,7 @@ namespace WindowTemplateWithPopup
             WindowSizeState();
         }
 
-        //Событие изменение состояния окна
+        //Event change state window
         private void Window_StateChanged(object sender, EventArgs e)
         {
             switch (this.WindowState)
@@ -263,45 +289,33 @@ namespace WindowTemplateWithPopup
             }
         }
 
-        //Собитие изменения размеров окна
+        //Event change size window
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             newWindowHeight = e.NewSize.Height;
             newWindowWidth = e.NewSize.Width;
         }
 
-        //Контекстное меню
+        //Context menu button "file"
         private void btn_file_l_click(object sender, RoutedEventArgs e)
         {
             btn_file_cm.IsOpen = true;
         }
 
+        // Turn off right mouse button for "file" button
         private void btn_file_r_click(object sender, MouseButtonEventArgs e)
         {
             e.Handled = true;
         }
 
-        private void btn_main_r_click(object sender, MouseButtonEventArgs e)
-        {
-            e.Handled = true;
-        }
-
-        /*private void btn_insert_l_click(object sender, RoutedEventArgs e)
-        {
-            btn_insert_cm.IsOpen = true;
-        }*/
-
-        private void btn_insert_r_click(object sender, MouseButtonEventArgs e)
-        {
-            e.Handled = true;
-        }
-
+        //Event changed location window
         private void Window_LocationChanged(object sender, EventArgs e)
         {
             newWindowPosX = this.Left;
             newWindowPosY = this.Top;
         }
 
+        //translate window on other language
         public void localization(string language_state) 
         {
 
@@ -315,18 +329,10 @@ namespace WindowTemplateWithPopup
                     window_language = language_state
                 });
 
-
             //reastart app
             System.Windows.Application.Current.Shutdown();
             Thread.Sleep(100);
-            
             System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
-
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

@@ -10,11 +10,16 @@
         mc:Ignorable="d"
         ResizeMode="CanResizeWithGrip"
         Icon="{StaticResource ic_logo}"
-        Title="{StaticResource window_title}" MinHeight="450" MinWidth="800"
+        Title="MainWindow" MinHeight="450" MinWidth="800"
         SizeChanged="Window_SizeChanged"
         StateChanged="Window_StateChanged"
-        LocationChanged="Window_LocationChanged"
-        Loaded="Window_Loaded">
+        LocationChanged="Window_LocationChanged">
+
+
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static local:MainWindow.MyCommand}" Executed="MyCommandExecuted"/>
+    </Window.CommandBindings>
+
     <Grid x:Name="main_grid">
         <Grid.RowDefinitions>
             <RowDefinition Height="34"/>

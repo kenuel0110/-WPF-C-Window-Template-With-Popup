@@ -13,13 +13,25 @@ namespace WindowTemplateWithPopup.Funcs
     {
         public MainWindow mainWindow = App.Current.MainWindow as MainWindow;
 
-        public void showslidedownpopup(Classes.Enums.Popups popup = Classes.Enums.Popups.None, string info = "") 
+        public async void showpopup(Classes.Enums.Popups popup = Classes.Enums.Popups.None, string info = "") 
         {
             switch (popup) 
             {
                 case Classes.Enums.Popups.SlideDown:
                     mainWindow.popup_slide_frame.Visibility = Visibility.Visible;
                     mainWindow.popup_slide_frame.NavigationService.Navigate(new Popups.Popup_slidedown_info(info));
+                    break;
+
+                case Classes.Enums.Popups.Popup:
+                    bool result = await mainWindow.open_popup();
+                    if (result == true)
+                    {
+                        showpopup(Classes.Enums.Popups.SlideDown, info.Split()[0].ToString());
+                    }
+                    else
+                    {
+                        showpopup(Classes.Enums.Popups.SlideDown, info.Split()[1].ToString());
+                    }
                     break;
             }
         }
