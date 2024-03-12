@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace WindowTemplateWithPopup.Pages
 {
     /// <summary>
-    /// Interaction logic for Page_Empty.xaml
+    /// Interaction logic for Page_empty.xaml
     /// </summary>
     public partial class Page_empty : Page
     {

@@ -4,19 +4,22 @@
                     xmlns:local="clr-namespace:WindowTemplateWithPopup.Strings">
 
     <!--Title window-->
-    <system:String x:Key="window_title">Шаблон окна с "Всплывающим окном"</system:String>
+    <system:String x:Key="window_title">Window template with "Pop-up"</system:String>
 
-    <!--Popup button-->
-    <system:String x:Key="btn_open_popup">Open "Popup"</system:String>
+    <!--Window file button button-->
+    <system:String x:Key="window_btn_file">File</system:String>
+
+    <!--Change language combobox-->
+    <system:String x:Key="cb_select_language">Select language</system:String>
 
     <!--Greeteng string-->
     <system:String x:Key="greeteng">Hello, it`s page of Main Window</system:String>
 
     <!--Button "open popup" string-->
-    <system:String x:Key="button_open_popup">Open Popup</system:String>
+    <system:String x:Key="btn_open_popup">Open Popup</system:String>
 
     <!--Button "open small slide-down popup" string-->
-    <system:String x:Key="button_open_small_popup">Open slide-down Popup</system:String>
+    <system:String x:Key="btn_open_small_popup">Open slide-down Popup</system:String>
 
     <!--Button "change language" string-->
     <system:String x:Key="button_change_language">Change Language</system:String>

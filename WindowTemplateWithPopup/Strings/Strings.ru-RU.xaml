@@ -5,9 +5,11 @@
     <!--Title window-->
     <system:String x:Key="window_title">Шаблон окна с "Всплывающим окном"</system:String>
 
-    <!--Popup button-->
-    <system:String x:Key="btn_open_popup">Открыть "Всплывающее окно"</system:String>
+    <!--Window file button button-->
+    <system:String x:Key="window_btn_file">Файл</system:String>
 
+    <!--Change language combobox-->
+    <system:String x:Key="cb_select_language">Выберите язык</system:String>
     
     <!--Greeteng string-->
     <system:String x:Key="greeteng">Привет, это страница Главного окна</system:String>
@@ -16,10 +18,10 @@
     <system:String x:Key="popup_greeteng">Это всплывающее окно</system:String>
 
     <!--Button "open popup" string-->
-    <system:String x:Key="button_open_popup">Открыть "Всплывающее окно"</system:String>
+    <system:String x:Key="btn_open_popup">Открыть "Всплывающее окно"</system:String>
 
     <!--Button "open small slide-down popup" string-->
-    <system:String x:Key="button_open_small_popup">Открыть выпадающее сверху "Всплывающее окно"</system:String>
+    <system:String x:Key="btn_open_small_popup">Открыть выпадающее сверху "Всплывающее окно"</system:String>
 
     <!--Button "change language" string-->
     <system:String x:Key="button_change_language">Изменить язык</system:String>

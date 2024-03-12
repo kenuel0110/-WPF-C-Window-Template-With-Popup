@@ -163,7 +163,8 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
-
+            
+            
             <!--TextBlock-->
                 <Style x:Key="textblock_header" TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignHeadline1TextBlock}">
                     <Setter Property="Foreground" Value="{StaticResource foreground_header}"/>
@@ -424,6 +425,57 @@
             
             <!--=====-->
 
+
+            <!--Combobox-->
+            <Style TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignOutlinedComboBox}" x:Key="combobox_accent">
+                <Setter Property="Foreground">
+                    <Setter.Value>
+                        <DynamicResource ResourceKey="{StaticResource foreground_header}" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Padding" Value="5 8" />
+                <Setter Property="TextBox.TextDecorations" Value="None"/>
+                <Setter Property="TextBox.Foreground" Value="{StaticResource foreground_header}"/>
+                <Setter Property="Border.CornerRadius" Value="{StaticResource size_CornerRadiusButton}"/>
+                <Setter Property="materialDesign:TextFieldAssist.DecorationVisibility" Value="Hidden" />
+                <Setter Property="IsEditable" Value="False"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="FontFamily" Value="{StaticResource LackRegular}"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+                <Setter Property="FontSize" Value="{StaticResource size_button_text}" />
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="{DynamicResource button_accent_hover_background}" />
+                        <Setter Property="BorderBrush" Value="Transparent" />
+                    </Trigger>
+
+                    <Trigger Property="IsSelected" Value="False">
+                        <Setter Property="Background" Value="{DynamicResource button_accent_background}" />
+                        <Setter Property="BorderBrush" Value="Transparent" />
+                    </Trigger>
+
+                    <Trigger Property="IsDropDownOpen" Value="True">
+                        <Setter Property="Background" Value="{DynamicResource button_accent_hover_background}" />
+                        <Setter Property="BorderBrush" Value="Transparent" />
+                    </Trigger>
+
+                    <Trigger Property="IsDropDownOpen" Value="False">
+                        <Setter Property="Background" Value="{DynamicResource button_accent_background}" />
+                        <Setter Property="BorderBrush" Value="Transparent" />
+                    </Trigger>
+
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="{DynamicResource button_accent_hover_background}" />
+                        <Setter Property="BorderBrush" Value="Transparent" />
+                    </Trigger>
+                    <Trigger Property="IsMouseOver" Value="False">
+                        <Setter Property="Background" Value="{DynamicResource button_accent_background}" />
+                        <Setter Property="BorderBrush" Value="Transparent" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <!--========-->
+
             <!--Set "Primary" and "Secondary" colors to theme-->
             <ResourceDictionary.MergedDictionaries>
 
@@ -436,7 +488,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
-                <materialDesign:CustomColorTheme BaseTheme="Dark" PrimaryColor="#FF8C1857" SecondaryColor="#FF520931" />
+                <materialDesign:CustomColorTheme BaseTheme="Dark" PrimaryColor="#1d495d" SecondaryColor="#122e3b" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

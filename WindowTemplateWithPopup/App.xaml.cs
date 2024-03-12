@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,6 +22,7 @@ namespace WindowTemplateWithPopup
         //Change Language
         public static void SelectCulture(string culture)
         {
+            MainWindow mainWindow = App.Current.MainWindow as MainWindow;
             if (String.IsNullOrEmpty(culture))
                 return;
 
@@ -57,9 +59,28 @@ namespace WindowTemplateWithPopup
             Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
 
-            MainWindow mainWindow = App.Current.MainWindow as MainWindow;
+            
             mainWindow.systemLanguage = culture;
         }
 
+        public static List<string> availableCultures()
+        {
+            List<string> availableCultures = new List<string>();
+            var dictionaryList = Application.Current.Resources.MergedDictionaries.ToList();
+            try
+            {
+                foreach (ResourceDictionary dictionary in dictionaryList)
+                {
+                    string source = dictionary.Source.OriginalString;
+                    if (source.StartsWith("/Strings/Strings.") && source.EndsWith(".xaml"))
+                    {
+                        string cultureCode = source.Substring(17, source.Length - 22); // Extract culture code
+                        availableCultures.Add(cultureCode);
+                    }
+                }
+            }
+            catch { }
+            return availableCultures;
+        }
     }
 }

@@ -28,34 +28,15 @@ namespace WindowTemplateWithPopup.Pages
         private Funcs.Popups_Funcs popups_funcs = new Funcs.Popups_Funcs();
         private Funcs.MainWindow_Funcs window_funcs = new Funcs.MainWindow_Funcs();
         private MainWindow mainWindow = App.Current.MainWindow as MainWindow;
-        private string language_state;
+        private List<string> availableCultures = new List<string>();
         #endregion
 
         public Page_main()
         {
             InitializeComponent();
-            language_state = mainWindow.systemLanguage;
-        }
-
-        private void btn_change_language_Click(object sender, RoutedEventArgs e)
-        {
-            switch (language_state) 
-            {
-                case "en-EN":
-                    language_state = "ru-RU";
-                    App.SelectCulture(language_state);
-                    break;
-                case "ru-RU":
-
-                    language_state = "en-EN";
-                    App.SelectCulture(language_state);
-                    break;
-            }
-
-            //reastart app
-            System.Windows.Application.Current.Shutdown();
-            Thread.Sleep(100);
-            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+            availableCultures = mainWindow.availableCultures;
+            availableCultures.Insert(0, FindResource("cb_select_language").ToString());
+            cb_change_language.ItemsSource = availableCultures;
         }
 
         private void btn_open_popup_Click(object sender, RoutedEventArgs e)
@@ -66,6 +47,15 @@ namespace WindowTemplateWithPopup.Pages
         private void btn_open_small_popup_Click(object sender, RoutedEventArgs e)
         {
             popups_funcs.showslidedownpopup(Classes.Enums.Popups.SlideDown, FindResource("popup_greeteng").ToString());
+        }
+
+        private void cb_change_language_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            if (cb_change_language.SelectedIndex != 0)
+            {
+                mainWindow.localization(cb_change_language.SelectedItem.ToString());
+            }
         }
 
     }

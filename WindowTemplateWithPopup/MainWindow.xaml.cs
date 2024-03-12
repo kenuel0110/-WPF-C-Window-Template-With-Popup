@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,6 +26,7 @@ namespace WindowTemplateWithPopup
         #region global_values
         //Language strings
         public string systemLanguage;
+        public List<string> availableCultures;
         #endregion
 
         #region local_values
@@ -49,8 +51,9 @@ namespace WindowTemplateWithPopup
         //initialize func
         private void init()
         {
-            //get language
-            systemLanguage = System.Globalization.CultureInfo.CurrentCulture.Name;
+            
+            //get list available languages
+            availableCultures = App.availableCultures();
 
             mainwindow_funcs.chkFirstStart("settings", "settings.json");
             mainwindow_funcs.create_json("temp.json");
@@ -58,6 +61,12 @@ namespace WindowTemplateWithPopup
             Classes.Data_Classes.Class_JSON_Setting setting = mainwindow_funcs.openJSONSetting();
 
             App.SelectCulture(setting.window_language);
+
+            //manual update elements text
+            title_window.Text = FindResource("window_title").ToString();
+            btn_file.Content = FindResource("window_btn_file").ToString();
+            btn_file_new.Header = FindResource("window_menu_new").ToString();
+            btn_file_open.Header = FindResource("window_menu_open").ToString();
 
             WindowSizeState(setting.maximilize_window);
             System.Windows.Application.Current.MainWindow.Height = setting.size_window[0];
@@ -202,6 +211,27 @@ namespace WindowTemplateWithPopup
             newWindowPosY = this.Top;
         }
 
+        public void localization(string language_state) 
+        {
+
+            App.SelectCulture(language_state);
+            mainwindow_funcs.saveJSONSetting(
+                new Classes.Data_Classes.Class_JSON_Setting
+                {
+                    maximilize_window = window_state,
+                    size_window = new List<double>() { newWindowHeight, newWindowWidth },
+                    position_window = new List<double>() { newWindowPosX, newWindowPosY },
+                    window_language = language_state
+                });
+
+
+            //reastart app
+            System.Windows.Application.Current.Shutdown();
+            Thread.Sleep(100);
+            
+            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+
+        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
