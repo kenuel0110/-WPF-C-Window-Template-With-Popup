@@ -39,9 +39,17 @@ namespace WindowTemplateWithPopup.Pages
             cb_change_language.ItemsSource = availableCultures;
         }
 
-        private void btn_open_popup_Click(object sender, RoutedEventArgs e)
+        private async void btn_open_popup_Click(object sender, RoutedEventArgs e)
         {
-            
+            bool result = await mainWindow.open_popup();
+            if (result == true)
+            {
+                popups_funcs.showslidedownpopup(Classes.Enums.Popups.SlideDown, FindResource("popup_accept").ToString());
+            }
+            else 
+            {
+                popups_funcs.showslidedownpopup(Classes.Enums.Popups.SlideDown, FindResource("popup_cancel").ToString());
+            }
         }
 
         private void btn_open_small_popup_Click(object sender, RoutedEventArgs e)

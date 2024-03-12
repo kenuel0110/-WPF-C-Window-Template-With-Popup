@@ -16,9 +16,9 @@
         </Grid.RowDefinitions>
 
             <Border Style="{StaticResource border_popup_titlebar}" Grid.Row="0">
-            <Button  x:Name="btn_popup_close" Click="btn_popup_close_Click" HorizontalAlignment="Right" Margin="0 0 12 0"  Style="{StaticResource button_control_popup}">
+           <!-- <Button  x:Name="btn_popup_close" Click="btn_popup_close_Click" HorizontalAlignment="Right" Margin="0 0 12 0"  Style="{StaticResource button_control_popup}">
                 <Image Source="{StaticResource ic_close}" Style="{StaticResource image_control_window}"/>
-            </Button>
+            </Button>-->
         </Border>
 
         <Grid Grid.Row="1" MinWidth="180" MinHeight="80" Margin="10" MaxHeight="450">

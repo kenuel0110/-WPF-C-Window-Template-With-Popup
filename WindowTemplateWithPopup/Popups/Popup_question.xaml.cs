@@ -20,6 +20,16 @@ namespace WindowTemplateWithPopup.Popups
     /// </summary>
     public partial class Popup_question : Page
     {
+
+        #region global_varibles
+        public bool popup_Result { get; set; }
+        #endregion
+
+        #region local_value
+        private Funcs.Popups_Funcs popups_funcs = new Funcs.Popups_Funcs();
+        private MainWindow mainWindow = App.Current.MainWindow as MainWindow;
+        #endregion
+
         public Popup_question()
         {
             InitializeComponent();
@@ -27,17 +37,29 @@ namespace WindowTemplateWithPopup.Popups
 
         private void btn_accept_Click(object sender, RoutedEventArgs e)
         {
-
+            mainWindow.popup_frame.Visibility = Visibility.Hidden;
+            mainWindow.deblurBackground();
+            if (NavigationService.CanGoBack)
+                NavigationService.GoBack();
+            mainWindow.SetDialogResult_popup(true);
         }
 
         private void btn_cancel_Click(object sender, RoutedEventArgs e)
         {
-
+            mainWindow.popup_frame.Visibility = Visibility.Hidden;
+            mainWindow.deblurBackground();
+            if (NavigationService.CanGoBack)
+                NavigationService.GoBack();
+            ((MainWindow)Application.Current.MainWindow).SetDialogResult_popup(false);
         }
 
         private void btn_popup_close_Click(object sender, RoutedEventArgs e)
         {
-
+            mainWindow.popup_frame.Visibility = Visibility.Hidden;
+            mainWindow.deblurBackground();
+            if (NavigationService.CanGoBack)
+                NavigationService.GoBack();
+            ((MainWindow)Application.Current.MainWindow).SetDialogResult_popup(false);
         }
     }
 }

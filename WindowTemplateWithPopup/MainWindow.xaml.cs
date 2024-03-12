@@ -39,6 +39,10 @@ namespace WindowTemplateWithPopup
         private double newWindowPosY;
 
         private Classes.Enums.WindowState window_state;
+
+        //local keys for popup
+        bool setdialogResult_popup;
+        private TaskCompletionSource<bool> tcs;
         #endregion
 
         public MainWindow()
@@ -82,6 +86,93 @@ namespace WindowTemplateWithPopup
             newWindowPosY = setting.position_window[1];
 
             main_frame.NavigationService.Navigate(new Pages.Page_main());
+        }
+
+        //open Popup func
+        public async Task<bool> open_popup()
+        {
+            blurBackground();
+            popup_frame.Visibility = Visibility.Visible;
+            Popups.Popup_question popup_question = new Popups.Popup_question();
+            popup_frame.NavigationService.Navigate(popup_question);
+            tcs = new TaskCompletionSource<bool>();
+
+            // wait, until varible changed
+            bool result = await tcs.Task;
+            return result;
+        }
+
+        internal void SetDialogResult_popup(bool result)
+        {
+            setdialogResult_popup = result;
+            if (result == true)
+                tcs.SetResult(true);
+            else
+                tcs.SetResult(false);
+            tcs.TrySetCanceled();
+        }
+
+        public void blurBackground()
+        {
+            border_shadow.Visibility = Visibility.Visible;
+            BlurEffect blurEffect = new BlurEffect();
+            blurEffect.Radius = 0;
+            main_frame.Effect = blurEffect;
+
+            DoubleAnimation animation = new DoubleAnimation();
+            animation.From = 0;
+            animation.To = 5;
+            animation.Duration = new Duration(TimeSpan.FromSeconds(0.3));
+
+            DoubleAnimation animation_shadow = new DoubleAnimation();
+            animation_shadow.From = 0.0;
+            animation_shadow.To = 0.4;
+            animation_shadow.Duration = new Duration(TimeSpan.FromSeconds(0.3));
+
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(animation);
+            storyboard.Children.Add(animation_shadow);
+
+            Storyboard.SetTarget(blurEffect, main_frame);
+            Storyboard.SetTargetProperty(animation, new PropertyPath("(UIElement.Effect).(BlurEffect.Radius)"));
+
+            Storyboard.SetTarget(animation_shadow, border_shadow);
+            Storyboard.SetTargetProperty(animation_shadow, new PropertyPath("Opacity"));
+
+            // Запустите анимацию
+            storyboard.Begin(main_frame);
+            border_shadow.Visibility = Visibility.Visible;
+        }
+
+        public void deblurBackground()
+        {
+            BlurEffect blurEffect = new BlurEffect();
+            blurEffect.Radius = 5;
+            main_frame.Effect = blurEffect;
+
+            DoubleAnimation animation = new DoubleAnimation();
+            animation.From = 5;
+            animation.To = 0;
+            animation.Duration = new Duration(TimeSpan.FromSeconds(0.3));
+
+            DoubleAnimation animation_shadow = new DoubleAnimation();
+            animation_shadow.From = 0.4;
+            animation_shadow.To = 0.0;
+            animation_shadow.Duration = new Duration(TimeSpan.FromSeconds(0.3));
+
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(animation);
+            storyboard.Children.Add(animation_shadow);
+
+            Storyboard.SetTarget(blurEffect, main_frame);
+            Storyboard.SetTargetProperty(animation, new PropertyPath("(UIElement.Effect).(BlurEffect.Radius)"));
+
+            Storyboard.SetTarget(animation_shadow, border_shadow);
+            Storyboard.SetTargetProperty(animation_shadow, new PropertyPath("Opacity"));
+
+            // Запустите анимацию
+            storyboard.Begin(main_frame);
+            border_shadow.Visibility = Visibility.Hidden;
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
