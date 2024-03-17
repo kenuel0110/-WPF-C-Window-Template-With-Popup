@@ -65,8 +65,8 @@ namespace WindowTemplateWithPopup
             //get list available languages
             availableCultures = App.availableCultures();
 
-            mainwindow_funcs.chkFirstStart(constants.settings, constants.settings_json);
-            mainwindow_funcs.create_json(constants.temp_json);
+            mainwindow_funcs.chkFirstStart(Classes.Constants.settings, Classes.Constants.settings_json);
+            mainwindow_funcs.create_json(Classes.Constants.temp_json);
 
             Classes.Data_Classes.JSON_Setting setting = mainwindow_funcs.openJSONSetting();
 
