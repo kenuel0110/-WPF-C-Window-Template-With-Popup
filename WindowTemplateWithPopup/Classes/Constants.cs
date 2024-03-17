@@ -16,6 +16,11 @@ namespace WindowTemplateWithPopup.Classes
         public string window_menu_open = "window_menu_open";
         //------*-------
 
+        //Main Page strings
+        public string cb_select_language = "cb_select_language";
+        public string popup_greeteng = "popup_greeteng";
+        //------*-------
+
         //Global string
         public string popup_accept = "popup_accept";
         public string popup_cancel = "popup_cancel";

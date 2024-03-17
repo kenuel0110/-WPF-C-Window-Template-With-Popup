@@ -24,29 +24,30 @@ namespace WindowTemplateWithPopup.Pages
     public partial class Page_main : Page
     {
 
-        #region local_value
+        #region local_values
         private Funcs.Popups_Funcs popups_funcs = new Funcs.Popups_Funcs();
         private Funcs.MainWindow_Funcs window_funcs = new Funcs.MainWindow_Funcs();
         private MainWindow mainWindow = App.Current.MainWindow as MainWindow;
         private List<string> availableCultures = new List<string>();
+        Classes.Constants constants = new Classes.Constants();
         #endregion
 
         public Page_main()
         {
             InitializeComponent();
             availableCultures = mainWindow.availableCultures;
-            availableCultures.Insert(0, FindResource("cb_select_language").ToString());
+            availableCultures.Insert(0, FindResource(constants.cb_select_language).ToString());
             cb_change_language.ItemsSource = availableCultures;
         }
 
         private void btn_open_popup_Click(object sender, RoutedEventArgs e)
         {
-            popups_funcs.showpopup(Classes.Enums.Popups.Popup, FindResource("popup_accept") + " " + FindResource("popup_cancel"));
+            popups_funcs.showpopup(Classes.Enums.Popups.Popup, FindResource(constants.popup_accept) + " " + FindResource(constants.popup_cancel));
         }
 
         private void btn_open_small_popup_Click(object sender, RoutedEventArgs e)
         {
-            popups_funcs.showpopup(Classes.Enums.Popups.SlideDown, FindResource("popup_greeteng").ToString());
+            popups_funcs.showpopup(Classes.Enums.Popups.SlideDown, FindResource(constants.popup_greeteng).ToString());
         }
 
         private void cb_change_language_SelectionChanged(object sender, SelectionChangedEventArgs e)

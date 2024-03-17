@@ -32,34 +32,34 @@ namespace WindowTemplateWithPopup
             //Search for the specified culture.     
             string requestedCulture = string.Format("/Strings/Strings.{0}.xaml", culture);
 
-            try
+            var resourceDictionary = dictionaryList.FirstOrDefault(d =>
+            d.Source != null &&
+            !string.IsNullOrEmpty(d.Source.OriginalString) &&
+            d.Source.OriginalString == requestedCulture);
+
+            if (resourceDictionary == null)
             {
-                var resourceDictionary = dictionaryList.
-                    FirstOrDefault(d => d.Source.OriginalString == requestedCulture);
-
-                if (resourceDictionary == null)
-                {
-                    //If not found, select our default language.             
-                    requestedCulture = "/Strings/Strings.en-EN.xaml";
-                    resourceDictionary = dictionaryList.
-                        FirstOrDefault(d => d.Source.OriginalString == requestedCulture);
-                }
-
-                //If we have the requested resource, remove it from the list and place at the end.     
-                //Then this language will be our string table to use.      
-                if (resourceDictionary != null)
-                {
-                    Application.Current.Resources.MergedDictionaries.Remove(resourceDictionary);
-                    Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
-                }
+                // Если не найдено, выбираем наш язык по умолчанию.
+                requestedCulture = "/Strings/Strings.en-EN.xaml";
+                resourceDictionary = dictionaryList.FirstOrDefault(d =>
+                    d.Source != null &&
+                    !string.IsNullOrEmpty(d.Source.OriginalString) &&
+                    d.Source.OriginalString == requestedCulture);
             }
-            catch { }
+
+            //If we have the requested resource, remove it from the list and place at the end.     
+            //Then this language will be our string table to use.      
+            if (resourceDictionary != null)
+            {
+                Application.Current.Resources.MergedDictionaries.Remove(resourceDictionary);
+                Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
+            }
 
             //Inform the threads of the new culture.     
             Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
 
-            
+
             mainWindow.systemLanguage = culture;
         }
 
