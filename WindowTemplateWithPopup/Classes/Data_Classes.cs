@@ -9,7 +9,7 @@ namespace WindowTemplateWithPopup.Classes
 {
     class Data_Classes
     {
-        public class Class_JSON_Setting
+        public class JSON_Setting
         {
             public Enums.WindowState maximilize_window { get; set; } = Enums.WindowState.None;
             public List<double> size_window { get; set; } = new List<double>() { 450.0, 800.0  };
@@ -17,7 +17,7 @@ namespace WindowTemplateWithPopup.Classes
             public string window_language { get; set; } = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
         }
 
-        public class Class_JSON_Temp
+        public class JSON_Temp
         {
             public string path { get; set; }
         }

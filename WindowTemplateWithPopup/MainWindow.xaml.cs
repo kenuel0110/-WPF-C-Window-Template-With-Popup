@@ -34,6 +34,7 @@ namespace WindowTemplateWithPopup
 
         #region local_values
         Funcs.MainWindow_Funcs mainwindow_funcs = new Funcs.MainWindow_Funcs();
+        Classes.Constants constants = new Classes.Constants();
 
         private double newWindowHeight;
         private double newWindowWidth;
@@ -64,18 +65,18 @@ namespace WindowTemplateWithPopup
             //get list available languages
             availableCultures = App.availableCultures();
 
-            mainwindow_funcs.chkFirstStart("settings", "settings.json");
-            mainwindow_funcs.create_json("temp.json");
+            mainwindow_funcs.chkFirstStart(constants.settings, constants.settings_json);
+            mainwindow_funcs.create_json(constants.temp_json);
 
-            Classes.Data_Classes.Class_JSON_Setting setting = mainwindow_funcs.openJSONSetting();
+            Classes.Data_Classes.JSON_Setting setting = mainwindow_funcs.openJSONSetting();
 
             App.SelectCulture(setting.window_language);
 
             //manual update elements text
-            title_window.Text = FindResource("window_title").ToString();
-            btn_file.Content = FindResource("window_btn_file").ToString();
-            btn_file_new.Header = FindResource("window_menu_new").ToString();
-            btn_file_open.Header = FindResource("window_menu_open").ToString();
+            title_window.Text = FindResource(constants.window_title).ToString();
+            btn_file.Content = FindResource(constants.window_btn_file).ToString();
+            btn_file_new.Header = FindResource(constants.window_menu_new).ToString();
+            btn_file_open.Header = FindResource(constants.window_menu_open).ToString();
 
             WindowSizeState(setting.maximilize_window);
             System.Windows.Application.Current.MainWindow.Height = setting.size_window[0];
@@ -102,11 +103,11 @@ namespace WindowTemplateWithPopup
             bool result = await open_popup();
             if (result == true)
             {
-                MessageBox.Show(FindResource("popup_accept").ToString());
+                MessageBox.Show(FindResource(constants.popup_accept).ToString());
             }
             else
             {
-                MessageBox.Show(FindResource("popup_cancel").ToString());
+                MessageBox.Show(FindResource(constants.popup_cancel).ToString());
             }
         }
 
@@ -205,7 +206,7 @@ namespace WindowTemplateWithPopup
         {
             mainwindow_funcs.removeTemp();
             mainwindow_funcs.saveJSONSetting(
-                new Classes.Data_Classes.Class_JSON_Setting
+                new Classes.Data_Classes.JSON_Setting
                 {
                     maximilize_window = window_state,
                     size_window = new List<double>() { newWindowHeight, newWindowWidth },
@@ -321,7 +322,7 @@ namespace WindowTemplateWithPopup
 
             App.SelectCulture(language_state);
             mainwindow_funcs.saveJSONSetting(
-                new Classes.Data_Classes.Class_JSON_Setting
+                new Classes.Data_Classes.JSON_Setting
                 {
                     maximilize_window = window_state,
                     size_window = new List<double>() { newWindowHeight, newWindowWidth },

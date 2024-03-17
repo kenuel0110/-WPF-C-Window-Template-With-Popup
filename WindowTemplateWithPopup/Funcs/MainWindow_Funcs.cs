@@ -14,7 +14,9 @@ namespace WindowTemplateWithPopup.Funcs
 {
     class MainWindow_Funcs
     {
-        public MainWindow mainWindow = App.Current.MainWindow as MainWindow;
+        #region local_values
+        private Popups_Funcs popups_funcs = new Popups_Funcs();
+        #endregion
 
         //Checking and automatically creating folders
         public void chkAndCreateFolder(string path)
@@ -43,7 +45,7 @@ namespace WindowTemplateWithPopup.Funcs
         }
 
         //Saving a settings file
-        public void saveJSONSetting(Classes.Data_Classes.Class_JSON_Setting json_Setting)
+        public void saveJSONSetting(Classes.Data_Classes.JSON_Setting json_Setting)
         {
             string settingsString_ = "";
             if (json_Setting.maximilize_window == Classes.Enums.WindowState.Normal)
@@ -51,7 +53,7 @@ namespace WindowTemplateWithPopup.Funcs
             else if (json_Setting.maximilize_window == Classes.Enums.WindowState.Maximilize)
             {
                 settingsString_ = JsonSerializer.Serialize(
-                    new Classes.Data_Classes.Class_JSON_Setting()
+                    new Classes.Data_Classes.JSON_Setting()
                     {
                         maximilize_window = json_Setting.maximilize_window,
                         size_window = new List<double>() { 450, 800 }
@@ -65,45 +67,45 @@ namespace WindowTemplateWithPopup.Funcs
         {
             switch (file_name)
             {
-                case "settings.json":
-                    Classes.Data_Classes.Class_JSON_Setting json_Setting = new Classes.Data_Classes.Class_JSON_Setting();
+                case Classes.Constants.settings_json:
+                    Classes.Data_Classes.JSON_Setting json_Setting = new Classes.Data_Classes.JSON_Setting();
 
                     string settingsString = JsonSerializer.Serialize(json_Setting, new JsonSerializerOptions { WriteIndented = true });
 
-                    chkAndCreateFolder("settings");
-                    File.WriteAllText($"settings\\{file_name}", settingsString);
+                    chkAndCreateFolder(Classes.Constants.settings);
+                    File.WriteAllText($"{Classes.Constants.settings}\\{file_name}", settingsString);
                     break;
 
-                case "temp.json":
-                    chkAndCreateFolder(Path.GetDirectoryName("Temp\\temp.json"));
-                    Classes.Data_Classes.Class_JSON_Temp json_temp = new Classes.Data_Classes.Class_JSON_Temp
+                case Classes.Constants.temp_json:
+                    chkAndCreateFolder(Path.GetDirectoryName($"{Classes.Constants.temp}\\{Classes.Constants.temp_json}"));
+                    Classes.Data_Classes.JSON_Temp json_temp = new Classes.Data_Classes.JSON_Temp
                     {
                         //Random path
                         path = $"{Path.Combine(Path.GetRandomFileName(), Path.GetRandomFileName())}",
                     };
 
                     string tempString = JsonSerializer.Serialize(json_temp, new JsonSerializerOptions { WriteIndented = true });
-                    File.WriteAllText("Temp\\temp.json", tempString);
+                    File.WriteAllText($"{Classes.Constants.temp}\\{Classes.Constants.temp_json}", tempString);
                     break;
             }
         }
 
         //Opening a settings file
-        public Classes.Data_Classes.Class_JSON_Setting openJSONSetting()
+        public Classes.Data_Classes.JSON_Setting openJSONSetting()
         {
             FileStream file = null;
             try
             {
-                file = new FileStream($"settings\\settings.json", FileMode.OpenOrCreate);
+                file = new FileStream($"{Classes.Constants.settings}\\{Classes.Constants.settings_json}", FileMode.OpenOrCreate);
                 byte[] buffer = new byte[file.Length];
                 file.Read(buffer, 0, buffer.Length);
                 Encoding.Default.GetString(buffer);
-                Classes.Data_Classes.Class_JSON_Setting settings = JsonSerializer.Deserialize<Classes.Data_Classes.Class_JSON_Setting>(buffer);
+                Classes.Data_Classes.JSON_Setting settings = JsonSerializer.Deserialize<Classes.Data_Classes.JSON_Setting>(buffer);
                 return settings;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                popups_funcs.showpopup(Classes.Enums.Popups.SlideDown, ex.Message);
             }
             finally { file?.Close(); }
             return null;
@@ -112,15 +114,15 @@ namespace WindowTemplateWithPopup.Funcs
         //Remove temp used to pass information between pages
         public void removeTemp()
         {
-            Directory.Delete("Temp", true);
+            Directory.Delete(Classes.Constants.temp, true);
         }
 
 
         //Creating a temp file, for example, it remembers the last path
-        public void saveTemp(Classes.Data_Classes.Class_JSON_Temp new_temp)
+        public void saveTemp(Classes.Data_Classes.JSON_Temp new_temp)
         {
             string temp = JsonSerializer.Serialize(new_temp, new JsonSerializerOptions { WriteIndented = true });
-            using (StreamWriter sw = new StreamWriter("Temp\\temp.json"))
+            using (StreamWriter sw = new StreamWriter($"{Classes.Constants.temp}\\{Classes.Constants.temp_json}"))
             {
                 sw.Write(temp);
             }

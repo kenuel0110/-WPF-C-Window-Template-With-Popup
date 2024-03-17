@@ -21,5 +21,6 @@ namespace WindowTemplateWithPopup.Classes
             SlideDown = 1,
             Popup = 2
         }
+
     }
 }
