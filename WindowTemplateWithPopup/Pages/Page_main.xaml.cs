@@ -24,12 +24,12 @@ namespace WindowTemplateWithPopup.Pages
     public partial class Page_main : Page
     {
 
-        #region local_values
+        #region private_varibles
         private Funcs.Popups_Funcs popups_funcs = new Funcs.Popups_Funcs();
         private Funcs.MainWindow_Funcs window_funcs = new Funcs.MainWindow_Funcs();
         private MainWindow mainWindow = App.Current.MainWindow as MainWindow;
         private List<string> availableCultures = new List<string>();
-        Classes.Constants constants = new Classes.Constants();
+        private Classes.Constants constants = new Classes.Constants();
         #endregion
 
         public Page_main()

@@ -23,7 +23,7 @@ namespace WindowTemplateWithPopup
     /// </summary>
     public partial class MainWindow : Window
     {
-        #region global_values
+        #region public_varibles
         //Language strings
         public string systemLanguage;
         public List<string> availableCultures;
@@ -32,9 +32,9 @@ namespace WindowTemplateWithPopup
         public static RoutedCommand MyCommand = new RoutedCommand();
         #endregion
 
-        #region local_values
-        Funcs.MainWindow_Funcs mainwindow_funcs = new Funcs.MainWindow_Funcs();
-        Classes.Constants constants = new Classes.Constants();
+        #region private_varibles
+        private Funcs.MainWindow_Funcs mainwindow_funcs = new Funcs.MainWindow_Funcs();
+        private Classes.Constants constants = new Classes.Constants();
 
         private double newWindowHeight;
         private double newWindowWidth;
@@ -47,7 +47,7 @@ namespace WindowTemplateWithPopup
         
 
         //local keys for popup
-        bool setdialogResult_popup;
+        private bool setdialogResult_popup;
         private TaskCompletionSource<bool> tcs;
         #endregion
 
@@ -319,7 +319,6 @@ namespace WindowTemplateWithPopup
         //translate window on other language
         public void localization(string language_state) 
         {
-
             App.SelectCulture(language_state);
             mainwindow_funcs.saveJSONSetting(
                 new Classes.Data_Classes.JSON_Setting

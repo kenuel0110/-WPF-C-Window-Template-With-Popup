@@ -14,7 +14,7 @@ namespace WindowTemplateWithPopup.Funcs
 {
     class MainWindow_Funcs
     {
-        #region local_values
+        #region private_varibles
         private Popups_Funcs popups_funcs = new Popups_Funcs();
         #endregion
 

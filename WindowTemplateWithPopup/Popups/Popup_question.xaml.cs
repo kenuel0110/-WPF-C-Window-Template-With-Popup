@@ -20,11 +20,6 @@ namespace WindowTemplateWithPopup.Popups
     /// </summary>
     public partial class Popup_question : Page
     {
-
-        #region global_varibles
-        public bool popup_Result { get; set; }
-        #endregion
-
         #region local_value
         private Funcs.Popups_Funcs popups_funcs = new Funcs.Popups_Funcs();
         private MainWindow mainWindow = App.Current.MainWindow as MainWindow;

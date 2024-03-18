@@ -11,7 +11,9 @@ namespace WindowTemplateWithPopup.Funcs
 {
     class Popups_Funcs
     {
+        #region public_varibles
         public MainWindow mainWindow = App.Current.MainWindow as MainWindow;
+        #endregion
 
         public async void showpopup(Classes.Enums.Popups popup = Classes.Enums.Popups.None, string info = "") 
         {
@@ -36,7 +38,7 @@ namespace WindowTemplateWithPopup.Funcs
             }
         }
 
-        public void hidelidedownpopup()
+        public void hideslidedownpopup()
         {
             mainWindow.popup_slide_frame.Visibility = Visibility.Hidden;
         }

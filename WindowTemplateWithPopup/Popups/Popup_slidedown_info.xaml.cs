@@ -21,8 +21,8 @@ namespace WindowTemplateWithPopup.Popups
 
     public partial class Popup_slidedown_info : Page
     {
-        #region local_value
-        Funcs.Popups_Funcs popups_funcs = new Funcs.Popups_Funcs();
+        #region private_varibles
+        private Funcs.Popups_Funcs popups_funcs = new Funcs.Popups_Funcs();
         #endregion
 
         public Popup_slidedown_info(string info)
@@ -34,7 +34,7 @@ namespace WindowTemplateWithPopup.Popups
         private void btn_close_info_Click(object sender, RoutedEventArgs e)
         {
             popup_info.Visibility = Visibility.Hidden;
-            popups_funcs.hidelidedownpopup();
+            popups_funcs.hideslidedownpopup();
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
