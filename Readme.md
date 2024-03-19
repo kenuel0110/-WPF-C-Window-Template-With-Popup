@@ -10,9 +10,13 @@
 ## **Screenshots**
 
 ![Main view of the window](screenshots/en/main_view.png)
+
 ![Pop-up drop-down](screenshots/en/slide_down_popup_view.png)
+
 ![Pop-up in the form of dialogue](screenshots/en/popup_view.png)
+
 ![Change language](screenshots/en/change_language_view.png)
+
 ![Changed language](screenshots/en/another_language_view.png)
 
 ## **Content**
