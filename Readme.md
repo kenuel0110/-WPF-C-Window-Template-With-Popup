@@ -32,7 +32,7 @@
  * [**Description of interaction with localization files**](Readme.md#Description-of-interaction-with-localization-files)
 
     - [Adding lines](Readme.md#Adding-lines)
-    - [Description of the operation of the localization function](Readme.md#Description-of-the-operation-of-the-localization-function)
+    - [Description of the localization function](Readme.md#Description-of-the-localization-function)
 
  * [**Description of interaction with pop-ups**](Readme.md#Description-of-interaction-with-pop-ups)
 
