@@ -16,35 +16,35 @@
 ![Changed language](screenshots/en/another_language_view.png)
 
 ## **Content**
- * ![**Description of the project**](Readme.ru-RU.md#Description-of-the-project)
+ * ![**Description of the project**](Readme.md#Description-of-the-project)
 
- * ![**Installation**](Readme.ru-RU.md#Installation)
+ * ![**Installation**](Readme.md#Installation)
 
- * ![**Description of structure**](Readme.ru-RU.md#Description-of-structure)
+ * ![**Description of structure**](Readme.md#Description-of-structure)
 
- * ![**Description of interaction with the application theme**](Readme.ru-RU.md#Description-of-interaction-with-the-application-theme)
+ * ![**Description of interaction with the application theme**](Readme.md#Description-of-interaction-with-the-application-theme)
 
-    - ![Color changes](Readme.ru-RU.md#Change-colors)
-    - ![Changing icons](Readme.ru-RU.md#Changing-icons)
-    - ![Changing fonts](Readme.ru-RU.md#Changing-fonts)
-    - ![Resizing](Readme.ru-RU.md#Resizing)
+    - ![Color changes](Readme.md#Change-colors)
+    - ![Changing icons](Readme.md#Changing-icons)
+    - ![Changing fonts](Readme.md#Changing-fonts)
+    - ![Resizing](Readme.md#Resizing)
 
- * ![**Description of interaction with localization files**](Readme.ru-RU.md#Description-of-interaction-with-localization-files)
+ * ![**Description of interaction with localization files**](Readme.md#Description-of-interaction-with-localization-files)
 
-    - ![Adding lines](Readme.ru-RU.md#Adding-lines)
-    - ![Description of the operation of the localization function](Readme.ru-RU.md#Description-of-the-operation-of-the-localization-function)
+    - ![Adding lines](Readme.md#Adding-lines)
+    - ![Description of the operation of the localization function](Readme.md#Description-of-the-operation-of-the-localization-function)
 
- * ![**Description of interaction with pop-ups**](Readme.ru-RU.md#Description-of-interaction-with-pop-ups)
+ * ![**Description of interaction with pop-ups**](Readme.md#Description-of-interaction-with-pop-ups)
 
-    - ![Description of pop-up mechanics](Readme.ru-RU.md#Description-of-pop-up-mechanics)
-    - ![Calling a pop-up from above](Readme.ru-RU.md#Calling-a-pop-up-from-above)
-    - ![Pop-up call](Readme.ru-RU.md#Pop-up-call)
+    - ![Description of pop-up mechanics](Readme.md#Description-of-pop-up-mechanics)
+    - ![Calling a pop-up from above](Readme.md#Calling-a-pop-up-from-above)
+    - ![Pop-up call](Readme.md#Pop-up-call)
 
- * ![**Keyboard shortcuts**](Readme.ru-RU.md#Keyboard-shortcuts)
+ * ![**Keyboard shortcuts**](Readme.md#Keyboard-shortcuts)
 
-    - ![Adding a keyboard shortcut](Readme.ru-RU.md#Adding-a-keyboard-shortcut)
+    - ![Adding a keyboard shortcut](Readme.md#Adding-a-keyboard-shortcut)
 
- * ![**Conclusion**](Readme.ru-RU.md#Conclusion)
+ * ![**Conclusion**](Readme.md#Conclusion)
 
 ## **Project description**
 This project is a simple template for C# WPF applications that includes the following basic functions:
