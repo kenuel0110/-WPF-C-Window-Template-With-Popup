@@ -24,7 +24,7 @@
 
  * [**Description of interaction with the application theme**](Readme.md#Description-of-interaction-with-the-application-theme)
 
-    - [Color changes](Readme.md#Change-colors)
+    - [Color changes](Readme.md#Color-changes)
     - [Changing icons](Readme.md#Changing-icons)
     - [Changing fonts](Readme.md#Changing-fonts)
     - [Resizing](Readme.md#Resizing)
@@ -42,7 +42,7 @@
 
  * [**Keyboard shortcuts**](Readme.md#Keyboard-shortcuts)
 
-    - [Adding a keyboard shortcut](Readme.md#Adding-a-keyboard-shortcut)
+    - [Add a keyboard shortcut](Readme.md#Add-a-keyboard-shortcut)
 
  * [**Conclusion**](Readme.md#Conclusion)
 
