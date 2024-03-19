@@ -2,8 +2,8 @@
 
 ### **Languages**
 
-  [[Russian language](https://img.shields.io/badge/Language-Russian-blue)](Readme.ru-RU.md)
-  [[English Language](https://img.shields.io/badge/Language-English-green)](Readme.md)
+  [![Russian language](https://img.shields.io/badge/Language-Russian-blue)](Readme.ru-RU.md)
+  [![English Language](https://img.shields.io/badge/Language-English-green)](Readme.md)
 
 # **Pop-up project template**
 
@@ -24,10 +24,10 @@
 
  * [**Description of interaction with the application theme**](Readme.md#Description-of-interaction-with-the-application-theme)
 
-    - ![Color changes](Readme.md#Change-colors)
-    - ![Changing icons](Readme.md#Changing-icons)
-    - ![Changing fonts](Readme.md#Changing-fonts)
-    - ![Resizing](Readme.md#Resizing)
+    - [Color changes](Readme.md#Change-colors)
+    - [Changing icons](Readme.md#Changing-icons)
+    - [Changing fonts](Readme.md#Changing-fonts)
+    - [Resizing](Readme.md#Resizing)
 
  * [**Description of interaction with localization files**](Readme.md#Description-of-interaction-with-localization-files)
 
