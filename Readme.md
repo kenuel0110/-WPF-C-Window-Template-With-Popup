@@ -16,7 +16,7 @@
 ![Changed language](screenshots/en/another_language_view.png)
 
 ## **Content**
- * [**Description of the project**](Readme.md#Description-of-the-project)
+ * [**Project description**](Readme.md#Project-description)
 
  * [**Installation**](Readme.md#Installation)
 
