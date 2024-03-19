@@ -297,7 +297,7 @@ Structure:
 ```
 > This block inside ```App.xaml``` is responsible for adding localization files inside application resources
 
-   >__[IMPORTANT INFORMATION ABOUT THE STRUCTURE AND NAMES OF LOCALIZATION FILES](###!Important-information!)__
+   >__[IMPORTANT INFORMATION ABOUT THE STRUCTURE AND NAMES OF LOCALIZATION FILES](#!Important-information!)__
 
 ### Resizing
 ```xml
